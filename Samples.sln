@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{23D122
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicChat.CrossDomain", "BasicChat.CrossDomain\BasicChat.CrossDomain.csproj", "{CB260CB7-B437-4302-902A-5FA10CB281E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicChatConsole", "BasicChatConsole\BasicChatConsole.csproj", "{3473564B-8F9F-47AD-839A-244720F89061}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{CB260CB7-B437-4302-902A-5FA10CB281E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB260CB7-B437-4302-902A-5FA10CB281E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB260CB7-B437-4302-902A-5FA10CB281E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3473564B-8F9F-47AD-839A-244720F89061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3473564B-8F9F-47AD-839A-244720F89061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3473564B-8F9F-47AD-839A-244720F89061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3473564B-8F9F-47AD-839A-244720F89061}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

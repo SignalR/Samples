@@ -25,4 +25,4 @@ PublishProfiles/
 *.ncrunchsolution
 *.log
 *.vspx
-
+App_Data/

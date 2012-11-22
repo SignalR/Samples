@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR.Hubs;
 
-namespace BasicChat
+namespace BasicChat.Mvc
 {
     public class Chat : Hub
     {

@@ -55,6 +55,11 @@ namespace BasicChatWpfMvvm.ViewModel
         public MainViewModel()
         {
             MessageList = new ObservableCollection<string>();
+            InitializeConnection();
+        }
+
+        private async void InitializeConnection()
+        {
             _connection = new HubConnection("http://localhost:44914");
             _chat = _connection.CreateHubProxy("Chat");
 
@@ -62,7 +67,7 @@ namespace BasicChatWpfMvvm.ViewModel
 
             _chat.On<string>("send", MessageReceived);
 
-            _connection.Start();
+            await _connection.Start();
         }
 
         private async void SendMessage(string message)

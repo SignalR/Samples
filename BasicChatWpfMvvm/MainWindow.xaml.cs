@@ -14,7 +14,6 @@ namespace BasicChatWpfMvvm
         public MainWindow()
         {
             InitializeComponent();
-            Closing += (s, e) => ViewModelLocator.Cleanup();
         }
     }
 }

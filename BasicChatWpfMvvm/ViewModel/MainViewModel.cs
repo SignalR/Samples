@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.AspNet.SignalR.Client;
 using Microsoft.AspNet.SignalR.Client.Hubs;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -63,7 +64,6 @@ namespace BasicChatWpfMvvm.ViewModel
         {
             MessageList = new ObservableCollection<string>();
             InitializeConnection();
-            SendMessageCommand = new RelayCommand(() => SendMessage(NewMessage));
         }
 
         private async void InitializeConnection()
@@ -72,6 +72,10 @@ namespace BasicChatWpfMvvm.ViewModel
             _chat = _connection.CreateHubProxy("Chat");
 
             _chat.On<string>("send", MessageReceived);
+
+            SendMessageCommand = new RelayCommand(
+                () => SendMessage(NewMessage),
+                () => CanSendMessage());
 
             await _connection.Start();
         }
@@ -83,6 +87,12 @@ namespace BasicChatWpfMvvm.ViewModel
                 await _chat.Invoke("send", "WPF Client: " + message);
             }
             NewMessage = String.Empty;
+        }
+
+        private bool CanSendMessage()
+        {
+            return (_connection != null && 
+                _connection.State == ConnectionState.Connected);
         }
 
         private void MessageReceived(string message)

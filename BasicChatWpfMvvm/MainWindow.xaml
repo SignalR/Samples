@@ -4,17 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
+        xmlns:vm="clr-namespace:BasicChatWpfMvvm.ViewModel"
         mc:Ignorable="d ignore"
         Height="300"
         Width="300"
-        Title="BasicChatWpfMVVM"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        Title="BasicChatWpfMVVM">
 
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
-            
+
         </Grid.RowDefinitions>
         <ListView x:Name="Messages" Grid.Row="0" ItemsSource="{Binding Path=MessageList}"/>
         <DockPanel Height="40" Grid.Row="1">

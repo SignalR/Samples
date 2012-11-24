@@ -10,7 +10,6 @@ namespace BasicChatWpfMvvm
     {
         static App()
         {
-            DispatcherHelper.Initialize();
         }
     }
 }

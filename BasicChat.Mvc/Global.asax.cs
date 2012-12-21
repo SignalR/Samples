@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.SignalR;
 
 namespace BasicChat.Mvc
 {
@@ -17,6 +18,8 @@ namespace BasicChat.Mvc
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            RouteTable.Routes.MapHubs();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

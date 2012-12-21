@@ -1,7 +1,6 @@
 using System.Web;
 using System.Web.Routing;
 using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hosting.AspNet;
 
 [assembly: PreApplicationStartMethod(typeof(Samples.RegisterHubs), "Start")]
 

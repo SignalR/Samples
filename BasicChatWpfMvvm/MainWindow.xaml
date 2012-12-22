@@ -1,0 +1,47 @@
+﻿<Window x:Class="BasicChatWpfMvvm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.ignore.com"
+        xmlns:vm="clr-namespace:BasicChatWpfMvvm.ViewModel"
+        mc:Ignorable="d ignore"
+        Height="300"
+        Width="300"
+        Title="BasicChatWpfMVVM">
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+
+        </Grid.RowDefinitions>
+        <ListView x:Name="Messages" Grid.Row="0" ItemsSource="{Binding Path=MessageList}"/>
+        <DockPanel Height="40" Grid.Row="1">
+            <DockPanel
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Height="Auto">
+
+                <StackPanel 
+                    DockPanel.Dock="Right" 
+                    Width="40" 
+                    VerticalAlignment="Stretch" 
+                    Height="Auto">
+                    <Button x:Name="SendMessage" 
+                            Command="{Binding SendMessageCommand}" 
+                            Content="Send" 
+                            Height="40" />
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Stretch">
+                    <TextBox x:Name="NewMessage" TextWrapping="Wrap" Height="40" Text="{Binding NewMessage}"/>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>

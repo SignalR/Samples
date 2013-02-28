@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using Microsoft.AspNet.SignalR;
+using Owin;
 
 namespace BasicChat.SelfHost
 {
@@ -7,7 +8,12 @@ namespace BasicChat.SelfHost
         // This method name is important
         public void Configuration(IAppBuilder app)
         {
-            app.MapHubs();
+            var config = new HubConfiguration
+            {
+                EnableCrossDomain = true
+            };
+
+            app.MapHubs(config);
         }
     }
 }

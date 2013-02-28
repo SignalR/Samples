@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.SignalR.Hubs;
+﻿using Microsoft.AspNet.SignalR;
 
 namespace BasicChat.SelfHost.Hubs
 {

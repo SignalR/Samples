@@ -19,6 +19,7 @@ namespace BasicChat.Mvc
         {
             AreaRegistration.RegisterAllAreas();
 
+            // The order of this is important
             RouteTable.Routes.MapHubs();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

@@ -10,8 +10,12 @@ namespace Samples
     {
         public static void Start()
         {
-            // Register the default hubs route: ~/signalr/hubs
-            RouteTable.Routes.MapHubs();            
+            var config = new HubConfiguration
+            {
+                EnableCrossDomain = true
+            };
+
+            RouteTable.Routes.MapHubs(config);
         }
     }
 }

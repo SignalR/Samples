@@ -24,10 +24,13 @@ namespace BasicChatConsole
             await connection.Start();
 
             string line = null;
-            while ((line = Console.ReadLine()) != null)
+            await Task.Factory.StartNew(() =>
             {
-                await chat.Invoke("send", "Console: " + line);
-            }
+                while (!String.IsNullOrEmpty(line = Console.ReadLine()))
+                {
+                    chat.Invoke("send", "Console: " + line);
+                }
+            });
         }
     }
 }

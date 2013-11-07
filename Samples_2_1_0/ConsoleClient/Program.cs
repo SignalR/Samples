@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ConsoleClient.Features.HubT;
 
 namespace ConsoleClient
@@ -20,13 +16,14 @@ Select sample you want to run: ");
             var sample = Console.ReadKey().KeyChar;
             Console.WriteLine();
 
-            var writer = Console.Out;           
+            var url = "http://localhost:46962/";
+            var writer = Console.Out;
 
             switch(sample)
             {
                 case '1':
                     var client = new HubTClient(writer);
-                    client.RunAsync("http://localhost:40476/").Wait();
+                    client.RunAsync(url).Wait();
                     break;
                 default:
                     break;

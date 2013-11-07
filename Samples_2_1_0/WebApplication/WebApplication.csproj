@@ -180,6 +180,7 @@
     <Compile Include="Features\HubT\ITaskScheduler.cs" />
     <Compile Include="Features\HubT\TaskSchedulerHub.cs" />
     <Compile Include="Features\Progress\LongRunningTaskHub.cs" />
+    <Compile Include="Features\SendToUser\SendToUserHub.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,7 +193,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Features\HubT\intellisense.jpg" />
     <Content Include="Features\Progress\LongRunningTaskHub.js" />
+    <Content Include="Features\SendToUser\SendToUserHub.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -237,6 +240,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Feature\Progress.cshtml" />
     <Content Include="Views\Feature\HubT.cshtml" />
+    <Content Include="Views\Feature\SendToUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

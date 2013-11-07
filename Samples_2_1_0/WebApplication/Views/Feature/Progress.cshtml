@@ -1,0 +1,21 @@
+﻿<h2>Progress</h2>
+<summary>
+    Hub method taking a long time to complete its work, now it can easily return updates as the work is getting done.
+</summary>
+
+<h4>Sample</h4>
+<dl class="dl-expanded">
+    <dd id="progress">
+        <br />Percent: <span id="percent">0%</span>
+        <br />Last Update: <span id="lastUpdate"></span>
+        <br />Message: <span id="message"></span>
+        <div class="progress" style="width: 300px">
+            <div class="progress-bar" style="width: 0"></div>
+        </div>
+    </dd>
+</dl>
+
+@section Scripts {
+    @Scripts.Render("~/signalr/js")
+    @Scripts.Render("~/Features/Progress/LongRunningTaskHub.js")
+}

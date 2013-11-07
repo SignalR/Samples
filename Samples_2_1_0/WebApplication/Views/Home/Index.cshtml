@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h2>ASP.NET SignalR</h2>
+    <p class="lead">Library that makes developing real-time web functionality easy. SignalR allows bi-directional communication between server and client. Servers can now push content to connected clients instantly as it becomes available. SignalR supports Web Sockets, and falls back to other compatible techniques for older browsers. SignalR includes APIs for connection management (for instance, connect and disconnect events), grouping connections, and authorization.</p>
+    <p><a href="http://asp.net/signalr" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Hub&lt;T&gt;</h2>
+        <p>Derive class Hub&lt;T&gt; where T is an interface containing client methods (methods you usually invoke in a C# client using hubProxy.On). The advantage is you get autocomplete on server side when typing Clients.Caller.</p>
+        <p><a class="btn btn-default" href="/Feature/HubT">See Demo &raquo;</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2>Progress</h2>
+        <p>Hub method taking a long time to complete its work, now it can easily return updates as the work is getting done.</p>
+        <p><a class="btn btn-default" href="/Feature/Progress">See Demo &raquo;</a></p>
+    </div>
+</div>

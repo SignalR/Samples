@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-1.1.3.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        $(function () {
+            var hub = $.connection.operations,
+                // Stores a list of pending operations
+                pendingOperations = {};
+
+            hub.client.cancelled = function (operationId) {
+                pendingOperations[operationId].reject(operationId);
+            };
+
+            hub.client.complete = function (operationId) {
+                pendingOperations[operationId].resolve(operationId);
+            };
+
+            function doOperation() {
+                var deferred = $.Deferred(),
+                    beginPromise = hub.server.beginOperation().then(function (id) {
+                        // When we successfully started the operation keep track of global progress
+                        // in a new deferred
+                        pendingOperations[id] = deferred;
+
+                        // Clean up when it's over
+                        deferred.always(function () {
+                            delete pendingOperations[id];
+                        });
+
+                        return id;
+                    });
+
+                // Return an object that has all of the context:
+                // - The original promise of starting the operation
+                // - A promise that represents the entire operation
+                // - A way to cancel the operation
+                return {
+                    started: beginPromise,
+                    promise: deferred.promise(),
+                    cancel: function () {
+                        beginPromise.then(function (id) {
+                            hub.server.cancelOperation(id);
+                        });
+                    }
+                };
+            }
+
+            $.connection.hub.start().done(function () {
+                var operation;
+
+                $('#begin').click(function () {
+                    if (operation) {
+                        return;
+                    }
+
+                    operation = doOperation();
+
+                    operation.started.done(function (id) {
+                        $('#operations').append('<li id="operation-' + id + '">Operation (' + id + ') started...</li>');
+                    });
+
+                    operation.started.fail(function () {
+                        $('#status').html('Operation failed to start');
+                    });
+
+                    operation.promise.then(
+                        function (id) {
+                            $('#operation-' + id).html('Operation (' + id + ') is complete!');
+                        },
+                        function (id) {
+                            $('#operation-' + id).html('Operation (' + id + ') was cancelled!');
+                        }
+                    );
+
+                    // When we're done allow doing another one
+                    operation.promise.always(function () {
+                        operation = null;
+                    });
+
+                });
+
+                $('#cancel').click(function () {
+                    if (!operation) {
+                        return;
+                    }
+
+                    operation.cancel();
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="begin" value="Begin" />
+    <input type="button" id="cancel" value="Cancel" />
+
+    <div id="status"></div>
+
+    <ul id="operations">
+    </ul>
+</body>
+</html>

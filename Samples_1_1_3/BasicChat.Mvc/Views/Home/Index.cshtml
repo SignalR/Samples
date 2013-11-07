@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                To learn more about ASP.NET MVC visit
+                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
+                If you have any questions about ASP.NET MVC visit
+                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+            </p>
+        </div>
+    </section>
+}
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-1.1.3.min.js"></script>
+    <script src="~/signalR/hubs"></script>
+    <script>
+        $(function () {
+            var chat = $.connection.chat;
+
+            chat.client.send = function (message) {
+                $('#message').append('<li>' + message + '</li>');
+            };
+
+            $.connection.hub.start().done(function () {
+                $('#send').click(function () {
+                    chat.server.send($('#msg').val());
+                });
+            });
+        });
+    </script>
+}
+
+<input type="text" id="msg" value=" " />
+<input type="button" id="send" value="send" />
+
+<ul id="message">
+</ul>

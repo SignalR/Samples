@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <input type="text" id="msg" value=" " />
+    <input type="button" id="send" value="send" />
+    <ul id="message">
+    </ul>
+    <script src="Scripts/jquery-1.8.3.min.js"></script>
+    <script src="Scripts/jquery.signalR-1.1.3.min.js"></script>
+    <script>
+        $(function () {
+            // Open a connection to the remote server
+            var connection = $.hubConnection('http://localhost:44914');
+            var chat = connection.createHubProxy('chat');
+
+            chat.on('send', function (message) {
+                $('#message').append('<li>' + message + '</li>');
+            });
+
+            // Turn logging on so we can see the calls in the browser console
+            connection.logging = true;
+
+            connection.start().done(function () {
+                $('#send').click(function () {
+                    chat.invoke('send', $('#msg').val());
+                });
+            });
+        });
+    </script>
+</body>
+</html>

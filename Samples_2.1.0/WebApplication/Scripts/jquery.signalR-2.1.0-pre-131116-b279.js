@@ -364,11 +364,6 @@
 
             against = against || window.location;
 
-            // If the url is protocol relative, prepend the current windows protocol to the url. 
-            if (url.indexOf("//") === 0) {
-                url = against.protocol + url;
-            }
-
             if (url.indexOf("http") !== 0) {
                 return false;
             }
@@ -490,6 +485,12 @@
             // as demonstrated by Issue #623.
             if (config.transport === "auto" && config.jsonp === true) {
                 config.transport = "longPolling";
+            }
+
+            // If the url is protocol relative, prepend the current windows protocol to the url. 
+            if (connection.url.indexOf("//") === 0) {
+                connection.url = window.location.protocol + connection.url;
+                connection.log("Protocol relative URL detected, normalizing it to '" + connection.url + "'.");
             }
 
             if (this.isCrossDomain(connection.url)) {
@@ -812,8 +813,10 @@
             /// <param name="callback" type="Function">A callback function to execute when an error occurs on the connection</param>
             /// <returns type="signalR" />
             var connection = this;
-            $(connection).bind(events.onError, function (e, data) {
-                callback.call(connection, data);
+            $(connection).bind(events.onError, function (e, errorData, sendData) {
+                // In practice 'errorData' is the SignalR built error object.
+                // In practice 'sendData' is undefined for all error events except those triggered by ajaxSend.  For ajaxSend 'sendData' is the original send payload.
+                callback.call(connection, errorData, sendData);
             });
             return connection;
         },
@@ -988,11 +991,12 @@
             checkIfAlive(connection);
         }
 
-        transportLogic.markActive(connection);
-
-        connection._.beatHandle = window.setTimeout(function () {
-            beat(connection);
-        }, connection._.beatInterval);
+        // Ensure that we successfully marked active before continuing the heartbeat.
+        if (transportLogic.markActive(connection)) {
+            connection._.beatHandle = window.setTimeout(function () {
+                beat(connection);
+            }, connection._.beatInterval);
+        }
     }
 
     function checkIfAlive(connection) {
@@ -1375,7 +1379,7 @@
             }
         },
 
-        startHeartbeat: function(connection) {
+        startHeartbeat: function (connection) {
             beat(connection);
         },
 
@@ -1383,8 +1387,13 @@
             connection._.lastMessageAt = new Date().getTime();
         },
 
-        markActive: function(connection) {
-            connection._.lastActiveAt = new Date().getTime();
+        markActive: function (connection) {
+            if (transportLogic.verifyLastActive(connection)) {
+                connection._.lastActiveAt = new Date().getTime();
+                return true;
+            }
+
+            return false;
         },
 
         ensureReconnectingState: function (connection) {
@@ -1403,7 +1412,7 @@
             }
         },
 
-        verifyReconnect: function (connection) {
+        verifyLastActive: function (connection) {
             if (new Date().getTime() - connection._.lastActiveAt >= connection.reconnectWindow) {
                 connection.log("There has not been an active server connection for an extended period of time. Stopping connection.");
                 connection.stop();
@@ -1421,12 +1430,12 @@
             // and a reconnectTimeout isn't already set.
             if (isConnectedOrReconnecting(connection) && !connection._.reconnectTimeout) {
                 // Need to verify before the setTimeout occurs because an application sleep could occur during the setTimeout duration.
-                if (!transportLogic.verifyReconnect(connection)) {
+                if (!transportLogic.verifyLastActive(connection)) {
                     return;
                 }
 
                 connection._.reconnectTimeout = window.setTimeout(function () {
-                    if (!transportLogic.verifyReconnect(connection)) {
+                    if (!transportLogic.verifyLastActive(connection)) {
                         return;
                     }
 
@@ -1908,13 +1917,13 @@
             var that = this;
 
             // Need to verify before the setTimeout occurs because an application sleep could occur during the setTimeout duration.
-            if (!transportLogic.verifyReconnect(connection)) {
+            if (!transportLogic.verifyLastActive(connection)) {
                 return;
             }
 
             window.setTimeout(function () {
                 // Verify that we're ok to reconnect.
-                if (!transportLogic.verifyReconnect(connection)) {
+                if (!transportLogic.verifyLastActive(connection)) {
                     return;
                 }
 
@@ -2198,7 +2207,7 @@
                                     // Therefore we don't want to change that failure code path.
                                     if ((connection.state === signalR.connectionState.connected ||
                                         connection.state === signalR.connectionState.reconnecting) &&
-                                        !transportLogic.verifyReconnect(connection)) {
+                                        !transportLogic.verifyLastActive(connection)) {
                                         return;
                                     }
 
@@ -2578,7 +2587,7 @@
         });
 
         connection.error(function (errData, origData) {
-            var data, callbackId, callback;
+            var callbackId, callback;
 
             if (connection.transport && connection.transport.name === "webSockets") {
                 // WebSockets connections have all callbacks removed on reconnect instead
@@ -2591,26 +2600,18 @@
                 return;
             }
 
-            try {
-                data = window.JSON.parse(origData);
-                if (!data.I) {
-                    // The original data doesn't have a callback ID so not a send error
-                    return;
-                }
-            } catch (e) {
-                // The original data is not a JSON payload so this is not a send error
-                return;
-            }
-
-            callbackId = data.I;
+            callbackId = origData.I;
             callback = connection._.invocationCallbacks[callbackId];
 
-            // Invoke the callback with an error to reject the promise
-            callback.method.call(callback.scope, { E: errData });
+            // Verify that there is a callback bound (could have been cleared)
+            if (callback) {
+                // Delete the callback
+                connection._.invocationCallbacks[callbackId] = null;
+                delete connection._.invocationCallbacks[callbackId];
 
-            // Delete the callback
-            connection._.invocationCallbacks[callbackId] = null;
-            delete connection._.invocationCallbacks[callbackId];
+                // Invoke the callback with an error to reject the promise
+                callback.method.call(callback.scope, { E: errData });
+            }
         });
 
         connection.reconnecting(function () {

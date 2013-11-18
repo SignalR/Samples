@@ -1,0 +1,43 @@
+﻿<h2>Hub</h2>
+<summary>
+    Demonstrates all features of the lower-level connection API including starting and stopping, sending and receiving messages, and managing groups.
+</summary>
+
+<br />
+
+<h4>Instructions</h4>
+<ol>
+    <li>Open multiple browser windows.</li>
+    <li>Use the form below to send messages to one or many users</li>
+</ol>
+
+<br />
+<div>
+    <h4>Form</h4>
+    <br /><input type="text" id="message" placeholder="Message" size="100" />
+    <br /><input type="text" id="connectionId" placeholder="Connection Id" size="100" />
+    <br /><input type="text" id="groupName" placeholder="Group Name" size="100" />
+    <br />
+    <button id="startStop" class="btn"><i id="startStopIcon" class="glyphicon glyphicon-play"></i> <span id="startStopText">Start Connection</span></button>
+    <input type="button" id="sendToMe" class="btn" value="Send to me" />
+    <input type="button" id="sendToConnectionId" class="btn" value="Send to connectionId" />
+    <input type="button" id="sendBroadcast" class="btn" value="Send broadcast" />
+    <input type="button" id="sendToGroup" class="btn" value="Send to group" />
+    <input type="button" id="joinGroup" class="btn" value="Join Group" />
+    <input type="button" id="leaveGroup" class="btn" value="Leave Group" />
+    <br />
+    Exception Handling:
+    <input type="button" id="throwOnVoidMethod" class="btn" value="Throw on sync method" />
+    <input type="button" id="throwOnTaskMethod" class="btn" value="Throw on async method" />
+    <input type="button" id="throwHubException" class="btn" value="Throw HubException" />
+</div>
+
+<div>
+    <h4>Messages</h4>
+    <ul id="messages"></ul>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/signalr/js")
+    @Scripts.Render("~/Features/Hub/DemoHub.js")
+}

@@ -39,11 +39,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.0-pre-131106-b269\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.0-pre-131116-b279\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.0-pre-131106-b269\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.0-pre-131116-b279\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -176,9 +178,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Features\ConnectionManager\BackgroundThread.cs" />
     <Compile Include="Features\HubT\ITaskAgent.cs" />
     <Compile Include="Features\HubT\ITaskScheduler.cs" />
     <Compile Include="Features\HubT\TaskSchedulerHub.cs" />
+    <Compile Include="Features\Hub\DemoHub.cs" />
+    <Compile Include="Features\PersistentConnection\DemoPersistentConnection.cs" />
+    <Compile Include="Features\PersistentConnection\Message.cs" />
     <Compile Include="Features\Progress\LongRunningTaskHub.cs" />
     <Compile Include="Features\SendToUser\SendToUserHub.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,7 +199,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Features\ConnectionManager\BackgroundThread.js" />
     <Content Include="Features\HubT\intellisense.jpg" />
+    <Content Include="Features\Hub\DemoHub.js" />
+    <Content Include="Features\PersistentConnection\DemoPersistentConnection.js" />
     <Content Include="Features\Progress\LongRunningTaskHub.js" />
     <Content Include="Features\SendToUser\SendToUserHub.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -205,8 +214,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.0-pre-131106-b269.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.0-pre-131106-b269.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.0-pre-131116-b279.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.0-pre-131116-b279.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -241,6 +250,9 @@
     <Content Include="Views\Feature\Progress.cshtml" />
     <Content Include="Views\Feature\HubT.cshtml" />
     <Content Include="Views\Feature\SendToUser.cshtml" />
+    <Content Include="Views\Feature\PersistentConnection.cshtml" />
+    <Content Include="Views\Feature\Hub.cshtml" />
+    <Content Include="Views\Feature\ConnectionManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

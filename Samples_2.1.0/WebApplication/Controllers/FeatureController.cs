@@ -8,6 +8,21 @@ namespace WebApplication.Controllers
 {
     public class FeatureController : Controller
     {
+        public ActionResult PersistentConnection()
+        {
+            return View();
+        }
+
+        public ActionResult Hub()
+        {
+            return View();
+        }
+
+        public ActionResult ConnectionManager()
+        {
+            return View();
+        }
+
         public ActionResult HubT()
         {
             return View();

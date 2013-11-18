@@ -8,22 +8,45 @@
     <p><a href="http://asp.net/signalr" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
 
+<h4>New Features in SignalR 1.0.0</h4>
 <div class="row">
     <div class="col-md-6">
-        <h2>Hub&lt;T&gt;</h2>
-        <p>Derive class Hub&lt;T&gt; where T is an interface containing client methods (methods you usually invoke in a C# client using hubProxy.On). The advantage is you get autocomplete on server side when typing Clients.Caller.</p>
-        <p><a class="btn btn-default" href="/Feature/HubT">See Demo &raquo;</a></p>
+        <h3><a href="/Feature/PersistentConnection">PersistentConnection</a></h3>
+        <p>Derive PersistentConnection class to use a low-level connection API to send and receive untyped messages.</p>
     </div>
     <div class="col-md-6">
-        <h2>Progress</h2>
-        <p>Hub method taking a long time to complete its work, now it can easily return updates as the work is getting done.</p>
-        <p><a class="btn btn-default" href="/Feature/Progress">See Demo &raquo;</a></p>
+        <h3><a href="/Feature/Hub">Hub</a></h3>
+        <p>Derive Hub class to use a high-level connection API to enable remote method invocation and typed messages.</p>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <h2>Send to User</h2>
+        <h3><a href="/Feature/ConnectionManager">ConnectionManager</a></h3>
+        <p>Use GlobalHost.ConnectionManager to send Messages using a PersistentConnection or Hub from anywhere on the same process.</p>
+    </div>
+</div>
+
+<h4>New Features in SignalR 1.0.1</h4>
+<h4>New Features in SignalR 1.1.0</h4>
+<h4>New Features in SignalR 1.1.1</h4>
+<h4>New Features in SignalR 1.1.2</h4>
+<h4>New Features in SignalR 1.1.3</h4>
+<h4>New Features in SignalR 2.0.0</h4>
+<h4>New Features in SignalR 2.1.0</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3><a href="/Feature/HubT">Hub&lt;T&gt;</a></h3>
+        <p>Derive Hub&lt;T&gt; class where T is an interface containing client methods (methods you usually invoke in a C# client using hubProxy.On). The advantage is you get autocomplete on server side when typing Clients.Caller.</p>
+    </div>
+    <div class="col-md-6">
+        <h3><a href="/Feature/Progress">Progress</a></h3>
+        <p>Hub method taking a long time to complete its work, now it can easily return updates as the work is getting done.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h3><a href="/Feature/SendToUser">Send to User</a></h3>
         <p>Send messages to authenticated users by using their username instead of a connectionId.</p>
-        <p><a class="btn btn-default" href="/Feature/SendToUser">See Demo &raquo;</a></p>
     </div>
 </div>

@@ -1,5 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using Microsoft.AspNet.SignalR;
+using Microsoft.Owin;
 using Owin;
+using WebApplication.Features.SamplePersistentConnection;
 
 [assembly: OwinStartupAttribute(typeof(WebApplication.Startup))]
 namespace WebApplication
@@ -10,6 +12,7 @@ namespace WebApplication
         {
             ConfigureAuth(app);
             app.MapSignalR();
+            app.MapSignalR<DemoPersistentConnection>("/Connections/DemoPersistentConnection");
         }
     }
 }

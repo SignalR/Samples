@@ -1,5 +1,7 @@
 ﻿using System;
+using ConsoleClient.Features.Hub;
 using ConsoleClient.Features.HubT;
+using ConsoleClient.Features.PersistentConnection;
 
 namespace ConsoleClient
 {
@@ -9,17 +11,11 @@ namespace ConsoleClient
         {
             Console.Write(
 @"
-New Features in SignalR 1.0.0
+New Features in version 1.0.0
   1. PersistentConnection
   2. Hub
-New Features in SignalR 1.0.1
-New Features in SignalR 1.1.0
-New Features in SignalR 1.1.1
-New Features in SignalR 1.1.2
-New Features in SignalR 1.1.3
-New Features in SignalR 2.0.0
-New Features in SignalR 2.1.0
-  1. Hub<T>
+New Features in version 2.1.0
+  3. Hub<T>
 
 Select sample you want to run: ");
             var sample = Console.ReadKey().KeyChar;
@@ -31,8 +27,16 @@ Select sample you want to run: ");
             switch(sample)
             {
                 case '1':
-                    var client = new HubTClient(writer);
-                    client.RunAsync(url).Wait();
+                    var client = new ConnectionClient(writer);
+                    client.RunAsync(url + "Connections/DemoPersistentConnection").Wait();
+                    break;
+                case '2':
+                    var hubClient = new HubClient(writer);
+                    hubClient.RunAsync(url).Wait();
+                    break;
+                case '3':
+                    var hubTClient = new HubTClient(writer);
+                    hubTClient.RunAsync(url).Wait();
                     break;
                 default:
                     break;

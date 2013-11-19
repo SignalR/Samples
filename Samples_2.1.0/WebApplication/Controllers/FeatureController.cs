@@ -65,8 +65,19 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult HubException()
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult SendToUser()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult SendToUsers()
         {
             return View();
         }

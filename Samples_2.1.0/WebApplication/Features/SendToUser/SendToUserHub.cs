@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 
 namespace WebApplication.Features.SendToUser
 {
@@ -16,11 +12,6 @@ namespace WebApplication.Features.SendToUser
         public void SendToUser(string userId, string value)
         {
             Clients.User(userId).message(value);
-        }
-
-        public void SendToUsers(IList<string> userIds, string value)
-        {
-            Clients.Users(userIds).message(value);
         }
     }
 }

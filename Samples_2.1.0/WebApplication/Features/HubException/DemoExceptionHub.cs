@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 
-namespace WebApplication.Features.SampleHub
+namespace WebApplication.Features.SampleHubException
 {
-    public class DemoHub : Hub
+    public class DemoExceptionHub : Hub
     {
         public override Task OnConnected()
         {
@@ -83,18 +83,6 @@ namespace WebApplication.Features.SampleHub
         public void ThrowHubException()
         {
             throw new HubException("ThrowHubException", new { Detail = "I can provide additional error information here!" });
-        }
-
-        public void StartBackgroundThread()
-        {
-            BackgroundThread.Enabled = true;
-            BackgroundThread.SendOnPersistentConnection();
-            BackgroundThread.SendOnHub();
-        }
-
-        public void StopBackgroundThread()
-        {
-            BackgroundThread.Enabled = false;            
         }
     }
 }

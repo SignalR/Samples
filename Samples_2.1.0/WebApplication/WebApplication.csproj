@@ -182,6 +182,7 @@
     <Compile Include="Features\Authorization\AuthorizationPersistentConnection.cs" />
     <Compile Include="Features\Authorization\Message.cs" />
     <Compile Include="Features\ConnectionManager\BackgroundThread.cs" />
+    <Compile Include="Features\HubException\DemoExceptionHub.cs" />
     <Compile Include="Features\HubT\ITaskAgent.cs" />
     <Compile Include="Features\HubT\ITaskScheduler.cs" />
     <Compile Include="Features\HubT\TaskSchedulerHub.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Features\PersistentConnection\DemoPersistentConnection.cs" />
     <Compile Include="Features\PersistentConnection\Message.cs" />
     <Compile Include="Features\Progress\LongRunningTaskHub.cs" />
+    <Compile Include="Features\SendToUsers\SendToUsersHub.cs" />
     <Compile Include="Features\SendToUser\SendToUserHub.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,10 +208,12 @@
     <Content Include="Features\Authorization\AuthorizationPersistentConnection.js" />
     <Content Include="Features\ConnectionManager\BackgroundThread.js" />
     <Content Include="Features\EnableDetailedErrors\EnableDetailedErrors.js" />
+    <Content Include="Features\HubException\DemoExceptionHub.js" />
     <Content Include="Features\HubT\intellisense.jpg" />
     <Content Include="Features\Hub\DemoHub.js" />
     <Content Include="Features\PersistentConnection\DemoPersistentConnection.js" />
     <Content Include="Features\Progress\LongRunningTaskHub.js" />
+    <Content Include="Features\SendToUsers\SendToUsersHub.js" />
     <Content Include="Features\SendToUser\SendToUserHub.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -263,6 +267,8 @@
     <Content Include="Views\Feature\Authorization.cshtml" />
     <Content Include="Views\Feature\AuthorizationHub.cshtml" />
     <Content Include="Views\Feature\AuthorizationPersistentConnection.cshtml" />
+    <Content Include="Views\Feature\SendToUsers.cshtml" />
+    <Content Include="Views\Feature\HubException.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

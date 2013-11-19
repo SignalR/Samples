@@ -55,6 +55,8 @@
       <Link>Features\HubT\ITaskScheduler.cs</Link>
     </Compile>
     <Compile Include="Features\HubT\HubTClient.cs" />
+    <Compile Include="Features\Hub\HubClient.cs" />
+    <Compile Include="Features\PersistentConnection\ConnectionClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,9 +15,9 @@ function getTimeString() {
 
 $(function () {
     var connection = $.connection.hub,
-        hub = $.connection.sendToUserHub,
+        hub = $.connection.sendToUsersHub,
         message = $("#message"),
-        userId = $("#userId");
+        userIds = $("#userIds");
 
     connection.logging = true;
 
@@ -33,11 +33,8 @@ $(function () {
             writeError(value);
         });
 
-    $("#sendToMe").click(function () {
-        hub.server.sendToMe(message.val());
-    });
-
-    $("#sendToUser").click(function () {
-        hub.server.sendToUser(userId.val(), message.val());
+    $("#sendToUsers").click(function () {
+        var listUsers = userIds.val().split(";");
+        hub.server.sendToUsers(listUsers, message.val());
     });
 });

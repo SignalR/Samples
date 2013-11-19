@@ -1,0 +1,28 @@
+﻿<h2>Send Message to many authenticated users</h2>
+<summary>
+    Push messages to users logged in concurrently on multiple browser windows and devices by using their username.
+</summary>
+
+<h4>Instructions</h4>
+<ol>
+    <li>Open multiple browsers (IE, Chrome, Firefox, etc), login with same user on some and a different user on the other windows.</li>
+    <li>Use the form below to send messages to one or many users</li>
+</ol>
+
+<div>
+    <h4>To multiple users</h4>
+          <input type="text" id="message" placeholder="Message" size="100" />
+    <br /><input type="text" id="userIds" placeholder="Users (separate by semicolon)" size="100" />
+    <br />
+    <input type="button" id="sendToUsers" class="btn" value="Send to specified userIds" />
+</div>
+
+<div>
+    <h4>Received Messages</h4>
+    <ul id="messages"></ul>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/signalr/js")
+    @Scripts.Render("~/Features/SendToUsers/SendToUsersHub.js")
+}

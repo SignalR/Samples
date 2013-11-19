@@ -36,8 +36,7 @@ function getQueryVariable(variable) {
 }
 
 $(function () {
-    var connection = $.connection.hub,
-        hub = $.connection.demoHub;
+    var connection = $.connection("/Connections/AuthorizationPersistentConnection");
 
     connection.logging = true;
 
@@ -51,6 +50,10 @@ $(function () {
 
     connection.error(function (error) {
         writeError(error);
+    });
+
+    connection.received(function (data) {
+        writeLine("received " + connection.json.stringify(data));
     });
 
     connection.reconnected(function () {
@@ -69,7 +72,7 @@ $(function () {
         writeEvent("stateChanged " + printState(state.oldState) + " => " + printState(state.newState));
         var buttonIcon = $("#startStopIcon");
         var buttonText = $("#startStopText");
-        if (printState(state.newState) == "connected") {
+        if (printState(state.newState) == "connected") {            
             buttonIcon.removeClass("glyphicon glyphicon-play");
             buttonIcon.addClass("glyphicon glyphicon-stop");
             buttonText.text("Stop Connection");
@@ -79,10 +82,6 @@ $(function () {
             buttonText.text("Start Connection");
         }
     });
-
-    hub.client.hubMessage = function (data) {
-        writeLine("hubMessage: " + data);
-    }
 
     $("#startStop").click(function () {
         if (printState(connection.state) == "connected") {
@@ -100,63 +99,30 @@ $(function () {
     });
 
     $("#sendToMe").click(function () {
-        hub.server.sendToMe($("#message").val());
+        connection.send({ type: "sendToMe", content: $("#message").val() });
     });
 
     $("#sendToConnectionId").click(function () {
-        hub.server.sendToConnectionId($("#connectionId").val(), $("#message").val());
+        connection.send({ type: "sendToConnectionId", content: $("#message").val(), connectionId: $("#connectionId").val() });
     });
 
     $("#sendBroadcast").click(function () {
-        hub.server.sendToAll($("#message").val());
+        connection.send({ type: "sendBroadcast", content: $("#message").val() });
     });
 
     $("#sendToGroup").click(function () {
-        hub.server.sendToGroup($("#groupName").val(), $("#message").val());
+        connection.send({ type: "sendToGroup", content: $("#message").val(), groupName: $("#groupName").val() });
     });
 
     $("#joinGroup").click(function () {
-        hub.server.joinGroup($("#groupName").val(), $("#connectionId").val());
+        connection.send({ type: "joinGroup", groupName: $("#groupName").val(), connectionId: $("#connectionId").val() });
     });
 
     $("#leaveGroup").click(function () {
-        hub.server.leaveGroup($("#groupName").val(), $("#connectionId").val());
+        connection.send({ type: "leaveGroup", groupName: $("#groupName").val(), connectionId: $("#connectionId").val() });
     });
 
-    $("#clientVariable").click(function () {
-        if (!hub.state.counter) {
-            hub.state.counter = 0;
-        }
-        hub.server.incrementClientVariable();
-    });
-
-    $("#throwOnVoidMethod").click(function () {
-        hub.server.throwOnVoidMethod()
-        .done(function (value) {
-            writeLine(result);
-        })
-        .fail(function (error) {
-            writeError(error);
-        });
-    });
-
-    $("#throwOnTaskMethod").click(function () {
-        hub.server.throwOnTaskMethod()
-        .done(function (value) {
-            writeLine(result);
-        })
-        .fail(function (error) {
-            writeError(error);
-        });
-    });
-
-    $("#throwHubException").click(function () {
-        hub.server.throwHubException()
-        .done(function (value) {
-            writeLine(result);
-        })
-        .fail(function (error) {
-            writeError(error.message + "<pre>" + connection.json.stringify(error.data) + "</pre>");
-        });
+    $("#throw").click(function () {
+        connection.send({ type: "throw" });
     });
 });

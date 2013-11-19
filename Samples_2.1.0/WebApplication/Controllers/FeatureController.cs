@@ -23,6 +23,38 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult EnableDetailedErrors()
+        {
+            return View();
+        }
+
+        public ActionResult Authorization()
+        {
+            return View();
+        }
+
+        public ActionResult AuthorizationFailedPersistentConnection()
+        {
+            return View("AuthorizationPersistentConnection");
+        }
+
+        public ActionResult AuthorizationFailedHub()
+        {
+            return View("AuthorizationHub");
+        }
+
+        [Authorize]
+        public ActionResult AuthorizationPersistentConnection()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult AuthorizationHub()
+        {
+            return View();
+        }
+
         public ActionResult HubT()
         {
             return View();

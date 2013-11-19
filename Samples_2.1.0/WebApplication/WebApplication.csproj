@@ -178,6 +178,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Features\Authorization\AuthorizationHub.cs" />
+    <Compile Include="Features\Authorization\AuthorizationPersistentConnection.cs" />
+    <Compile Include="Features\Authorization\Message.cs" />
     <Compile Include="Features\ConnectionManager\BackgroundThread.cs" />
     <Compile Include="Features\HubT\ITaskAgent.cs" />
     <Compile Include="Features\HubT\ITaskScheduler.cs" />
@@ -199,7 +202,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Features\Authorization\AuthorizationHub.js" />
+    <Content Include="Features\Authorization\AuthorizationPersistentConnection.js" />
     <Content Include="Features\ConnectionManager\BackgroundThread.js" />
+    <Content Include="Features\EnableDetailedErrors\EnableDetailedErrors.js" />
     <Content Include="Features\HubT\intellisense.jpg" />
     <Content Include="Features\Hub\DemoHub.js" />
     <Content Include="Features\PersistentConnection\DemoPersistentConnection.js" />
@@ -253,6 +259,10 @@
     <Content Include="Views\Feature\PersistentConnection.cshtml" />
     <Content Include="Views\Feature\Hub.cshtml" />
     <Content Include="Views\Feature\ConnectionManager.cshtml" />
+    <Content Include="Views\Feature\EnableDetailedErrors.cshtml" />
+    <Content Include="Views\Feature\Authorization.cshtml" />
+    <Content Include="Views\Feature\AuthorizationHub.cshtml" />
+    <Content Include="Views\Feature\AuthorizationPersistentConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

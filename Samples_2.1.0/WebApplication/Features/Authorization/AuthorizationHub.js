@@ -37,7 +37,7 @@ function getQueryVariable(variable) {
 
 $(function () {
     var connection = $.connection.hub,
-        hub = $.connection.demoHub;
+        hub = $.connection.authorizationHub;
 
     connection.logging = true;
 

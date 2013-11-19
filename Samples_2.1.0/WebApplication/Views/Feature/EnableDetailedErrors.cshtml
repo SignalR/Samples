@@ -1,14 +1,16 @@
-﻿<h2>Hub</h2>
+﻿<h2>EnableDetailedErrors</h2>
 <summary>
-    Derive Hub class to use a high-level connection API to enable remote method invocation and typed messages.
+    Use HubConfiguration.EnableDetailedErrors to send full exception stack details from server to client.
 </summary>
 
 <br />
 
 <h4>Instructions</h4>
 <ol>
-    <li>Open multiple browser windows.</li>
-    <li>Use the form below to send messages to one or many users</li>
+    <li>Start connection.</li>
+    <li>Click on any button on Exception Handling section (e.g. "Throw on sync method")</li>
+    <li>You should see server exception stack trace on the Web Developer Console.</li>
+    <li>There is an error.data object available when the exception type is HubException.</li>
 </ol>
 
 <br />
@@ -45,6 +47,6 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/signalr/js")
-    @Scripts.Render("~/Features/Hub/DemoHub.js")
+    @Scripts.Render("~/EnableDetailedErrors/signalr/js")
+    @Scripts.Render("~/Features/EnableDetailedErrors/EnableDetailedErrors.js")
 }

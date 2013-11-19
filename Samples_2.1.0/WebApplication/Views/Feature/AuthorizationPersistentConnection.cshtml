@@ -1,17 +1,8 @@
-﻿<h2>PersistentConnection</h2>
+﻿<h2>Authorization on PersistentConnection</h2>
 <summary>
-    Demonstrates all features of the lower-level connection API including starting and stopping, sending and receiving messages, and managing groups.
+    PersistentConnection is overriding method AuthorizeRequest to allow only authenticated users to start a connection.
 </summary>
 
-<br />
-
-<h4>Instructions</h4>
-<ol>
-    <li>Open multiple browser windows.</li> 
-    <li>Use the form below to send messages to one or many users</li>
-</ol>
-
-<br />
 <div>
     <h4>Form</h4>
     <br /><input type="text" id="message" placeholder="Message" size="100" />
@@ -41,5 +32,5 @@
 
 @section Scripts {
     @Scripts.Render("~/signalr/js")
-    @Scripts.Render("~/Features/PersistentConnection/DemoPersistentConnection.js")
+    @Scripts.Render("~/Features/Authorization/AuthorizationPersistentConnection.js")
 }

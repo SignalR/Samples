@@ -89,6 +89,7 @@ $(function () {
             connection.stop();
         } else if (printState(connection.state) == "disconnected") {
             var activeTransport = getQueryVariable("transport") || "auto";
+            connection.url = "/EnableDetailedErrors/signalr";
             connection.start({ transport: activeTransport })
             .done(function () {
                 writeLine("connection started. Id=" + connection.id + ". Transport=" + connection.transport.name);

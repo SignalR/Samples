@@ -15,9 +15,9 @@ namespace WebApplication.Features.Authorization
             return Clients.All.hubMessage("OnConnected " + Context.ConnectionId);
         }
 
-        public override Task OnDisconnected()
+        public override Task OnDisconnected(bool stopCalled)
         {
-            return Clients.All.hubMessage("OnDisconnected " + Context.ConnectionId);
+            return Clients.All.hubMessage("OnDisconnected(stopCalled: " + stopCalled + "): " + Context.ConnectionId);
         }
 
         public override Task OnReconnected()

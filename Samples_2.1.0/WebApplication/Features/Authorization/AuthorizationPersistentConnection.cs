@@ -18,9 +18,9 @@ namespace WebApplication.Features.Authorization
             return Connection.Broadcast("OnConnected " + connectionId);
         }
 
-        protected override Task OnDisconnected(IRequest request, string connectionId)
+        protected override Task OnDisconnected(IRequest request, string connectionId, bool stopCalled)
         {
-            return Connection.Broadcast("OnDisconnected " + connectionId);
+            return Connection.Broadcast("OnDisconnected(stopCalled: " + stopCalled + "): " + connectionId);
         }
 
         protected override Task OnReceived(IRequest request, string connectionId, string data)

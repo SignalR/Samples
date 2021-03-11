@@ -6,7 +6,7 @@
  *
  * Copyright Microsoft Open Technologies, Inc. All rights reserved.
  * Licensed under the Apache 2.0
- * https://github.com/SignalR/SignalR/blob/master/LICENSE.md
+ * https://github.com/SignalR/SignalR/blob/main/LICENSE.md
  *
  */
 
